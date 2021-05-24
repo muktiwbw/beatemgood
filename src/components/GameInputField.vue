@@ -1,10 +1,11 @@
 <template>
   <div>
     <div
-      class="atk-row mt-2"
       v-for="j in [ 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 ]"
       :key="j"
       :data-row="j"
+      class="atk-row"
+      :class="j !== 9 ? 'mt-2' : ''"
     >
       <button-attack 
         class="atk-col"
@@ -13,13 +14,14 @@
         :data-column="i-1" 
         color="#eff7e1" 
         icon="close-circle" 
-        size="large"
+        :size="$vuetify.breakpoint.name === 'xl' ? 'medium' : 'small'"
         ripple="false"
       />
       <button-attack 
         class="atk-reset"
         color="#810000"
         icon="trash-can"
+        :size="$vuetify.breakpoint.name === 'xl' ? 'medium' : 'small'"
         ripple="true"
         dark="true"
       />

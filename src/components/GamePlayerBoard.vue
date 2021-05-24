@@ -2,9 +2,8 @@
   <div>
     <!-- Game Input Fields -->
     <game-input-field />
-    <v-divider class="mt-4"></v-divider>
     <!-- Game Inputs -->
-    <game-action-bar class="mt-3" />
+    <game-action-bar class="mt-5" />
   </div>
 </template>
 

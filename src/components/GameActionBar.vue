@@ -7,7 +7,7 @@
       :key="i" 
       :color="ab.color" 
       :icon="ab.icon" 
-      size="large" 
+      :size="$vuetify.breakpoint.name === 'xl' ? 'medium' : 'small'" 
       dark="true"
       ripple="true"
     />
