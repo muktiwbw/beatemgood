@@ -8,23 +8,25 @@
       justify="center"
     >
       <v-col 
-        v-for="(player, i) in players"
+        v-for="(player, i) in getPlayers"
         :key="i"
         md="5"
         lg="5" 
         xl="4"
         class="pa-0"
-        :class="player.player === 1 ? 'text-right' : 'text-left'"
-        :data-player="player.player" 
-        :order="player.player === 1 ? 0 : 1"
+        :class="player.id === 0 ? 'text-right' : 'text-left'"
+        :data-player="player.id" 
+        :order="player.id === 0 ? 0 : 1"
       >
-        <game-player-board />
+        <game-player-board
+          :playerID="player.id"
+        />
       </v-col>
       <v-col
         cols="2"
       >
         <game-player-info 
-          :playersData="players"
+          :playersData="getPlayers"
         />
       </v-col>
     </v-row>
@@ -34,6 +36,7 @@
 <script>
 import GamePlayerBoard from '../components/GamePlayerBoard.vue'
 import GamePlayerInfo from '../components/GamePlayerInfo.vue'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'Game',
@@ -42,28 +45,32 @@ export default {
     GamePlayerInfo
   },
   data() {
-    return {
-      players: [
-        {
-          player: 1,
-          character: {
-            name: 'Crimson Reaper',
-            ability: 'Head Smasher',
-            avatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
-            gauge: 67
+    return {}
+  },
+  computed: {
+    ...mapGetters(['getPlayers', 'getGame'])
+  },
+  methods: {
+    ...mapActions(['initiateGame', 'commitInput']),
+    submitInput(e) {
+      const key = e.key.toLowerCase()
+
+      switch (key) {
+        case 'enter':
+          const playerID = 0
+          const currentTurn = this.getPlayers[playerID].turn
+
+          if (this.getPlayers[playerID].game.input[currentTurn].length === this.getGame.combinationMode) {
+            this.commitInput({ playerID })
           }
-        },
-        {
-          player: 2,
-          character: {
-            name: 'Kraken Girl',
-            ability: 'Tentangled',
-            avatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
-            gauge: 66
-          }
-        }
-      ]
+          
+          break;
+      }
     }
+  },
+  created() {
+    this.initiateGame()
+    window.addEventListener('keyup', this.submitInput)
   }
 }
 </script>

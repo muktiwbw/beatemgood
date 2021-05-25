@@ -8,6 +8,7 @@
     :color="color"
     depressed
     :ripple="ripple === 'true'"
+    :disabled="disabled === 'true'"
   >
     <v-icon dark>
       mdi-{{ icon }}
@@ -19,7 +20,7 @@
 export default {
   name: 'ButtonAttack',
   props: [
-    'color', 'icon', 'size', 'dark', 'ripple'
+    'color', 'icon', 'size', 'dark', 'ripple', 'disabled'
   ]
 }
 </script>

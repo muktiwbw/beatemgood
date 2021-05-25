@@ -3,14 +3,15 @@
     class="atk-hint"
   >
     <v-chip
-      class="ma-1"
+      class="correct"
       color="#9ede73"
       text-color="black"
     >
       {{ correct }}
     </v-chip>
     <v-chip
-      class="ma-1"
+      class="misplaced"
+      :style="$vuetify.breakpoint.name === 'xl' ? 'margin-left:3px' : 'margin-left:-12.25px;'"
       color="yellow"
       text-color="black"
     >
@@ -28,13 +29,15 @@ export default {
 }
 </script>
 
-<style scoped>
-  .atk-hint {
-    display: none;
-  }
-  
+<style scoped>  
+  /* .v-chip.misplaced {
+    margin-left: -12px;
+    margin-top: 14px;
+  } */
+
   .v-chip.v-size--default {
     font-size: 18px !important;
     font-weight: 600 !important;
+    opacity:75%;
   }
 </style>

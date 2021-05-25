@@ -6,21 +6,21 @@
       cols="12"
       v-for="(player, i) in playersData"
       :key="i"
-      :class="player.player === 1 ? 'text-left' : 'text-right'"
-      :align-self="player.player === 1 ? 'start' : 'end'"
+      :class="player.id === 0 ? 'text-left' : 'text-right'"
+      :align-self="player.id === 0 ? 'start' : 'end'"
     >
       <v-row>
         <v-col
           cols="4"
-          :order="player.player === 1 ? 0 : 1"
+          :order="player.id === 0 ? 0 : 1"
           class="pa-0"
-          :class="player.player === 1 ? 'text-right' : 'text-left'"
+          :class="player.id === 0 ? 'text-right' : 'text-left'"
         >
           <v-progress-circular
             :rotate="-90"
             :size="displaySetting.playerInfo.characterGauge.size"
             :width="15"
-            :value="player.character.gauge"
+            :value="player.gauge"
             color="red"
           >
             <v-avatar
@@ -42,7 +42,7 @@
               font-weight: ${displaySetting.playerInfo.characterName.fontWeight};
               font-size: ${displaySetting.playerInfo.characterName.fontSize}px;
               `"
-          >[P{{ player.player }}] {{ player.character.name }}</div>
+          >[P{{ player.id }}] {{ player.character.name }}</div>
           <div
             :style="`
               font-size: ${displaySetting.playerInfo.characterAbility.fontSize}px;
