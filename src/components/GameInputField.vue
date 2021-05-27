@@ -11,11 +11,11 @@
         class="atk-col"
         v-for="i in [0, 1, 2, 3, 4]" 
         :key="i" 
-        :color="j <= getPlayers[playerID].turn && getPlayers[playerID].game.input[j][i-gameData.inputPositionFormula] ? gameData.iconLib[getPlayers[playerID].game.input[j][i-gameData.inputPositionFormula]].color : '#eff7e1'" 
-        :icon="j <= getPlayers[playerID].turn && getPlayers[playerID].game.input[j][i-gameData.inputPositionFormula] ? gameData.iconLib[getPlayers[playerID].game.input[j][i-gameData.inputPositionFormula]].icon : 'close-circle'" 
+        :color="j <= getPlayers[playerID].turn && getPlayers[playerID].game.input[j][i-(5 - getPlayers[playerID].combination)] ? gameData.iconLib[getPlayers[playerID].game.input[j][i-(5 - getPlayers[playerID].combination)]].color : '#eff7e1'" 
+        :icon="j <= getPlayers[playerID].turn && getPlayers[playerID].game.input[j][i-(5 - getPlayers[playerID].combination)] ? gameData.iconLib[getPlayers[playerID].game.input[j][i-(5 - getPlayers[playerID].combination)]].icon : 'close-circle'" 
         :size="$vuetify.breakpoint.name === 'xl' ? 'medium' : 'small'"
         ripple="false"
-        :dark="j <= getPlayers[playerID].turn && getPlayers[playerID].game.input[j][i-gameData.inputPositionFormula] ? 'true' : 'false'"
+        :dark="j <= getPlayers[playerID].turn && getPlayers[playerID].game.input[j][i-(5 - getPlayers[playerID].combination)] ? 'true' : 'false'"
       />
       <button-attack
         :class="j < getPlayers[playerID].turn ? 'd-none' : ''"
@@ -53,7 +53,6 @@ export default {
   data() {
     return {
       gameData: {
-        inputPositionFormula: 0,
         iconLib: [
           {
             icon: 'hand',
@@ -84,7 +83,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([ 'getPlayers', 'getGame' ])
+    ...mapGetters([ 'getPlayers', 'getGame' ]),
+    inputPositionFormula() {
+      return 
+    }
   },
   methods: {
     ...mapActions([ 'cleanInput' ]),
@@ -103,9 +105,6 @@ export default {
       
       el.blur() // remove focus on button
     }
-  },
-  created() {
-    this.gameData.inputPositionFormula = 5 - this.getGame.combinationMode
   }
 }
 </script>

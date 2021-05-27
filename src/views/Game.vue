@@ -60,7 +60,7 @@ export default {
           const playerID = 0
           const currentTurn = this.getPlayers[playerID].turn
 
-          if (this.getPlayers[playerID].game.input[currentTurn].length === this.getGame.combinationMode) {
+          if (this.getPlayers[playerID].game.input[currentTurn].length === this.getPlayers[playerID].combination) {
             this.commitInput({ playerID })
           }
           
